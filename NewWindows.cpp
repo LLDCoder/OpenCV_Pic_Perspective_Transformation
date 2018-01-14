@@ -1,3 +1,4 @@
+This page is From http://www.cnblogs.com/skyfsm/p/7253208.html
 #include "stdafx.h"
 #include "NewWindows.h"
 
@@ -17,13 +18,13 @@ void NewWindow::mouse_callback(int event, int x, int y, int flags, void* param)
 		case CV_EVENT_RBUTTONDOWN:
 			mx = x, my = y;
 			dx = 0, dy = 0;
-			// °´ÏÂ×ó¼üÊ±¹â±ê¶¨Î»ÔÚË®Æ½¹ö¶¯ÌõÇøÓòÄÚ  
+			// æŒ‰ä¸‹å·¦é”®æ—¶å…‰æ ‡å®šä½åœ¨æ°´å¹³æ»šåŠ¨æ¡åŒºåŸŸå†…  
 			if (x >= rect_bar_horiz.x && x <= rect_bar_horiz.x + rect_bar_horiz.width
 				&& y >= rect_bar_horiz.y && y <= rect_bar_horiz.y + rect_bar_horiz.height)
 			{
 				clickHorizBar = true;
 			}
-			// °´ÏÂ×ó¼üÊ±¹â±ê¶¨Î»ÔÚ´¹Ö±¹ö¶¯ÌõÇøÓòÄÚ  
+			// æŒ‰ä¸‹å·¦é”®æ—¶å…‰æ ‡å®šä½åœ¨å‚ç›´æ»šåŠ¨æ¡åŒºåŸŸå†…  
 			if (x >= rect_bar_verti.x && x <= rect_bar_verti.x + rect_bar_verti.width
 				&& y >= rect_bar_verti.y && y <= rect_bar_verti.y + rect_bar_verti.height)
 			{
@@ -67,33 +68,33 @@ void NewWindow::mouse_callback(int event, int x, int y, int flags, void* param)
 	}
 }
 
-void NewWindow::myShowImageScroll(char* title, IplImage* src_img, int winWidth, int winHeight) // ÏÔÊ¾´°¿Ú´óĞ¡Ä¬ÈÏÎª 1400¡Á700  
+void NewWindow::myShowImageScroll(char* title, IplImage* src_img, int winWidth, int winHeight) // æ˜¾ç¤ºçª—å£å¤§å°é»˜è®¤ä¸º 1400Ã—700  
 {
-	CvRect  rect_dst,   // ´°¿ÚÖĞÓĞĞ§µÄÍ¼ÏñÏÔÊ¾ÇøÓò  
-		rect_src;   // ´°¿ÚÍ¼Ïñ¶ÔÓ¦ÓÚÔ´Í¼ÏñÖĞµÄÇøÓò  
+	CvRect  rect_dst,   // çª—å£ä¸­æœ‰æ•ˆçš„å›¾åƒæ˜¾ç¤ºåŒºåŸŸ  
+		rect_src;   // çª—å£å›¾åƒå¯¹åº”äºæºå›¾åƒä¸­çš„åŒºåŸŸ  
 	int imgWidth = src_img->width,
 		imgHeight = src_img->height,
-		barWidth = 25;  // ¹ö¶¯ÌõµÄ¿í¶È£¨ÏñËØ£©  
-	double  scale_w = (double)imgWidth / (double)winWidth,    // Ô´Í¼ÏñÓë´°¿ÚµÄ¿í¶È±ÈÖµ  
-		scale_h = (double)imgHeight / (double)winHeight;  // Ô´Í¼ÏñÓë´°¿ÚµÄ¸ß¶È±ÈÖµ  
+		barWidth = 25;  // æ»šåŠ¨æ¡çš„å®½åº¦ï¼ˆåƒç´ ï¼‰  
+	double  scale_w = (double)imgWidth / (double)winWidth,    // æºå›¾åƒä¸çª—å£çš„å®½åº¦æ¯”å€¼  
+		scale_h = (double)imgHeight / (double)winHeight;  // æºå›¾åƒä¸çª—å£çš„é«˜åº¦æ¯”å€¼  
 
 	if (scale_w<1)
 		winWidth = imgWidth + barWidth;
 	if (scale_h<1)
 		winHeight = imgHeight + barWidth;
 
-	int showWidth = winWidth, showHeight = winHeight; // rect_dst µÄ¿íºÍ¸ß  
-	int src_x = 0, src_y = 0;   // Ô´Í¼ÏñÖĞ rect_src µÄ×óÉÏ½ÇÎ»ÖÃ  
+	int showWidth = winWidth, showHeight = winHeight; // rect_dst çš„å®½å’Œé«˜  
+	int src_x = 0, src_y = 0;   // æºå›¾åƒä¸­ rect_src çš„å·¦ä¸Šè§’ä½ç½®  
 	int horizBar_width = 0, horizBar_height = 0,
 		vertiBar_width = 0, vertiBar_height = 0;
 
 	needScroll = scale_w>1.0 || scale_h>1.0 ? TRUE : FALSE;
-	// ÈôÍ¼Ïñ´óÓÚÉè¶¨µÄ´°¿Ú´óĞ¡£¬ÔòÏÔÊ¾¹ö¶¯Ìõ  
+	// è‹¥å›¾åƒå¤§äºè®¾å®šçš„çª—å£å¤§å°ï¼Œåˆ™æ˜¾ç¤ºæ»šåŠ¨æ¡  
 	if (needScroll)
 	{
 		IplImage* dst_img = cvCreateImage(cvSize(winWidth, winHeight), src_img->depth, src_img->nChannels);
 		cvZero(dst_img);
-		// Ô´Í¼Ïñ¿í¶È´óÓÚ´°¿Ú¿í¶È£¬ÔòÏÔÊ¾Ë®Æ½¹ö¶¯Ìõ  
+		// æºå›¾åƒå®½åº¦å¤§äºçª—å£å®½åº¦ï¼Œåˆ™æ˜¾ç¤ºæ°´å¹³æ»šåŠ¨æ¡  
 		if (1)
 		{
 			showHeight = winHeight - barWidth;
@@ -107,11 +108,11 @@ void NewWindow::myShowImageScroll(char* title, IplImage* src_img, int winWidth, 
 				showHeight + 1,
 				horizBar_width,
 				horizBar_height);
-			// ÏÔÊ¾Ë®Æ½¹ö¶¯Ìõ  
+			// æ˜¾ç¤ºæ°´å¹³æ»šåŠ¨æ¡  
 			cvRectangleR(dst_img, rect_bar_horiz, cvScalarAll(255), -1);
 		}
 
-		// Ô´Í¼Ïñ¸ß¶È´óÓÚ´°¿Ú¸ß¶È£¬ÔòÏÔÊ¾´¹Ö±¹ö¶¯Ìõ  
+		// æºå›¾åƒé«˜åº¦å¤§äºçª—å£é«˜åº¦ï¼Œåˆ™æ˜¾ç¤ºå‚ç›´æ»šåŠ¨æ¡  
 		if (scale_h > 1.0)
 		{
 			// printf("come!\n");
@@ -128,17 +129,17 @@ void NewWindow::myShowImageScroll(char* title, IplImage* src_img, int winWidth, 
 				vertiBar_y,
 				vertiBar_width,
 				vertiBar_height);
-			// ÏÔÊ¾´¹Ö±¹ö¶¯Ìõ  
+			// æ˜¾ç¤ºå‚ç›´æ»šåŠ¨æ¡  
 			//printf("w:%d h:%d\n", dst_img->width, dst_img->height);
 			cvRectangleR(dst_img, rect_bar_verti, cvScalarAll(255), -1);
 		}
 
 		showWidth = min(showWidth, imgWidth);
 		showHeight = min(showHeight, imgHeight);
-		// ÉèÖÃ´°¿ÚÏÔÊ¾ÇøµÄ ROI  
+		// è®¾ç½®çª—å£æ˜¾ç¤ºåŒºçš„ ROI  
 		rect_dst = cvRect(0, 0, showWidth, showHeight);
 		cvSetImageROI(dst_img, rect_dst);
-		// ÉèÖÃÔ´Í¼ÏñµÄ ROI  
+		// è®¾ç½®æºå›¾åƒçš„ ROI  
 		src_x = (int)((double)horizBar_x*scale_w);
 		src_y = (int)((double)vertiBar_y*scale_h);
 		src_x = min(src_x, imgWidth - showWidth);
@@ -152,17 +153,17 @@ void NewWindow::myShowImageScroll(char* title, IplImage* src_img, int winWidth, 
 			cvCircle(src_img, p, 3, Scalar(0, 0, 255), -1);
 			flag = 0;
 		}
-		// ½«Ô´Í¼ÏñÄÚÈİ¸´ÖÆµ½´°¿ÚÏÔÊ¾Çø  
+		// å°†æºå›¾åƒå†…å®¹å¤åˆ¶åˆ°çª—å£æ˜¾ç¤ºåŒº  
 		cvCopy(src_img, dst_img);
 
 		cvResetImageROI(dst_img);
 		cvResetImageROI(src_img);
-		// ÏÔÊ¾Í¼ÏñºÍ¹ö¶¯Ìõ  
+		// æ˜¾ç¤ºå›¾åƒå’Œæ»šåŠ¨æ¡  
 		cvShowImage(title, dst_img);
 
 		cvReleaseImage(&dst_img);
 	}
-	// Ô´Í¼ÏñĞ¡ÓÚÉè¶¨´°¿Ú£¬ÔòÖ±½ÓÏÔÊ¾Í¼Ïñ£¬ÎŞ¹ö¶¯Ìõ  
+	// æºå›¾åƒå°äºè®¾å®šçª—å£ï¼Œåˆ™ç›´æ¥æ˜¾ç¤ºå›¾åƒï¼Œæ— æ»šåŠ¨æ¡  
 	else
 	{
 		cvShowImage(title, src_img);
@@ -178,7 +179,7 @@ void m_callback(int event, int x, int y, int flags, void* param)
 
 void NewWindow::CreateWindows()
 {
-	int width = 1400, height = 700;  //ÏÔÊ¾µÄÍ¼Æ¬´óĞ¡
+	int width = 1400, height = 700;  //æ˜¾ç¤ºçš„å›¾ç‰‡å¤§å°
 
 	cvNamedWindow(label, 1);
 
